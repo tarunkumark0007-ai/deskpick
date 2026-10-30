@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DeskPick – Affiliate Marketing Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f1f5f4;--surface:#fff;--ink:#10222b;--muted:#506470;--line:#d5e0dd;--accent:#0b8a7a;--accent-ink:#fff;--hi:#ffc93c;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a20;--surface:#15262e;--ink:#e8f1ef;--muted:#9bb0b8;--line:#25404a;--accent:#2fc9b4;--accent-ink:#06211d}}
+:root[data-theme="dark"]{--bg:#0e1a20;--surface:#15262e;--ink:#e8f1ef;--muted:#9bb0b8;--line:#25404a;--accent:#2fc9b4;--accent-ink:#06211d}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Instrument Sans",system-ui,sans-serif}
+h1,h2,h3,.brand{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.1;margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--hi);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{overflow-x:hidden;overflow-wrap:break-word}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(14px,4vw,32px)}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 0;flex-wrap:wrap}
+.brand{font-size:1.5rem;font-weight:800;text-decoration:none}
+.brand span{background:var(--hi);color:#10222b;padding:0 6px;border-radius:4px}
+nav a{margin-left:18px;text-decoration:none;font-weight:500;color:var(--muted)}
+nav a:hover{color:var(--ink)}
+.notice{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--hi);padding:10px 14px;font-size:.9rem;color:var(--muted);border-radius:6px}
+.hero{padding:44px 0 24px}
+.hero h1{font-size:clamp(2.2rem,6vw,4rem);font-weight:800;max-width:14ch}
+.hero p{max-width:52ch;color:var(--muted);font-size:1.1rem;margin:14px 0 22px}
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+input,select,button{font:inherit}
+input[type=search],input[type=email],select{padding:11px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+input[type=search]{flex:1;min-width:200px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:7px 14px;border-radius:99px;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;padding-bottom:36px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.thumb{height:130px;display:grid;place-items:center;font-size:3.4rem}
+.body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.cat{font-size:.82rem;color:var(--muted)}
+.card h3{font-size:1.2rem}
+.card p{margin:0;color:var(--muted);font-size:.95rem;flex:1}
+.meta{display:flex;justify-content:space-between;align-items:baseline}
+.price{font-weight:700;font-size:1.2rem}
+.rating{font-size:.9rem;color:var(--muted)}
+.badge{align-self:flex-start;background:var(--hi);color:#10222b;font-size:.8rem;font-weight:600;padding:2px 8px;border-radius:4px}
+.btn{display:inline-block;text-align:center;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:600;padding:11px 16px;border-radius:8px;border:0;cursor:pointer}
+.btn:hover{filter:brightness(1.08)}
+.empty{grid-column:1/-1;padding:30px;text-align:center;color:var(--muted)}
+section.block{padding:34px 0;border-top:1px solid var(--line)}
+section.block h2{font-size:1.8rem;margin-bottom:14px}
+.news{display:flex;gap:10px;flex-wrap:wrap}
+.news input{flex:1;min-width:220px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 16px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0;color:var(--muted)}
+table{width:100%;border-collapse:collapse;background:var(--surface)}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+.scroll{overflow-x:auto}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:16px 0}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px}
+.stat b{display:block;font:800 2rem "Bricolage Grotesque",sans-serif}
+footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--muted);font-size:.9rem}
+footer a{margin-right:14px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+.hidden{display:none}
+.btn,.chip,select,input[type=search],input[type=email],summary{min-height:44px}
+.chip{display:inline-flex;align-items:center}
+input,select,button{font-size:16px}
+.card{min-width:0}
+@media (hover:none){.btn:hover{filter:none}}
+/* Large desktop: 4 columns (default above) */
+/* Laptop / small desktop */
+@media (max-width:1100px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* Tablet */
+@media (max-width:820px){
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+ .hero{padding:32px 0 16px}
+ .stats{grid-template-columns:repeat(3,1fr)}
+}
+/* Phone */
+@media (max-width:560px){
+ header{padding:12px 0}
+ .brand{font-size:1.3rem}
+ nav a{margin-left:0;margin-right:14px;display:inline-flex;align-items:center;min-height:44px}
+ nav{width:100%;overflow-x:auto;white-space:nowrap}
+ .hero{padding:22px 0 10px}
+ .hero p{font-size:1rem}
+ .tools{flex-direction:column;align-items:stretch}
+ .tools input[type=search],.tools select{width:100%;min-width:0}
+ .chips{flex-wrap:nowrap;overflow-x:auto;margin-left:calc(-1*clamp(14px,4vw,32px));margin-right:calc(-1*clamp(14px,4vw,32px));padding:2px clamp(14px,4vw,32px) 8px;-webkit-overflow-scrolling:touch}
+ .chip{flex:0 0 auto}
+ .grid{grid-template-columns:minmax(0,1fr)}
+ .thumb{height:110px;font-size:3rem}
+ .news{flex-direction:column}
+ .news input,.news .btn{width:100%;min-width:0}
+ .stats{grid-template-columns:1fr}
+ section.block{padding:26px 0}
+ section.block h2{font-size:1.5rem}
+ th,td{padding:8px;font-size:.9rem}
+ footer a{display:inline-block;padding:6px 0}
+ .toast{width:calc(100% - 28px);text-align:center}
+}
+/* Very small phones */
+@media (max-width:360px){.hero h1{font-size:2rem}.brand{font-size:1.15rem}}
+/* Landscape phones: avoid oversized hero */
+@media (max-height:480px) and (orientation:landscape){.hero{padding:16px 0 8px}.hero h1{font-size:2rem}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <a class="brand" href="#home"><span>Desk</span>Pick</a>
+  <nav aria-label="Main"><a href="#home">Products</a><a href="#dashboard">Dashboard</a><a href="#faq">FAQ</a></nav>
+</header>
+<p class="notice" role="note"><strong>Disclosure:</strong> Some links on this site are affiliate links. If you buy through them, we earn a commission at no extra cost to you.</p>
+
+<main id="home">
+  <section class="hero">
+    <h1>Home-office gear worth buying.</h1>
+    <p>We test and compare desk setups, then list the picks we’d buy ourselves. Browse by category, sort by price or rating, and follow the link to buy.</p>
+    <div class="tools">
+      <input type="search" id="q" placeholder="Search products" aria-label="Search products">
+      <select id="sort" aria-label="Sort products">
+        <option value="top">Top rated</option>
+        <option value="low">Price: low to high</option>
+        <option value="high">Price: high to low</option>
+      </select>
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="Categories"></div>
+  </section>
+  <div class="grid" id="grid" aria-live="polite"></div>
+
+  <section class="block">
+    <h2>Get the weekly deal list</h2>
+    <form class="news" id="news">
+      <input type="email" id="email" required placeholder="you@example.com" aria-label="Email address">
+      <button class="btn" type="submit">Subscribe</button>
+    </form>
+  </section>
+
+  <section class="block" id="faq">
+    <h2>Questions</h2>
+    <details><summary>How do you make money?</summary><p>We earn a small commission when you buy through our links. Prices for you stay the same.</p></details>
+    <details><summary>Do commissions change your rankings?</summary><p>No. Ratings come from our own testing and reader feedback, not payout rates.</p></details>
+    <details><summary>Are prices up to date?</summary><p>Prices change often. Check the store page for the current price before you buy.</p></details>
+  </section>
+</main>
+
+<main id="dashboard" class="hidden">
+  <section class="block" style="border-top:0">
+    <h2>Performance dashboard</h2>
+    <p style="color:var(--muted)">Demo numbers saved in this browser only. Real earnings come from your affiliate network’s report.</p>
+    <div class="stats">
+      <div class="stat"><b id="sClicks">0</b>Total clicks</div>
+      <div class="stat"><b id="sSubs">0</b>Subscribers</div>
+      <div class="stat"><b id="sEarn">$0.00</b>Estimated commission</div>
+    </div>
+    <div class="scroll"><table><thead><tr><th>Product</th><th>Clicks</th><th>Commission rate</th></tr></thead><tbody id="rows"></tbody></table></div>
+    <p><button class="btn" id="reset" type="button">Reset demo data</button></p>
+  </section>
+</main>
+
+<footer>
+  <a href="#faq">Affiliate disclosure</a><a href="#faq">Privacy</a><a href="#faq">Contact</a>
+  <p>© 2026 DeskPick. Demo site. Product names are examples.</p>
+</footer>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+// ---- CONFIG: replace with your own affiliate ID and real product links ----
+var AFFILIATE_TAG = "yourtag-20";
+var CONVERSION = 0.03;   // assumed 3% of clicks buy (demo only)
+var P = [
+ {id:1,name:"ErgoLift Standing Desk",cat:"Furniture",price:329,rate:6,rating:4.7,badge:"Editor’s pick",icon:"🪑",bg:"#cfeee8",desc:"Dual-motor frame with four memory presets and a 3-year warranty.",url:"https://example.com/standing-desk"},
+ {id:2,name:"SilentType Keyboard",cat:"Accessories",price:89,rate:4,rating:4.5,icon:"⌨️",bg:"#ffe9a8",desc:"Quiet mechanical switches, wireless, 40-hour battery.",url:"https://example.com/keyboard"},
+ {id:3,name:"ClearView 27” Monitor",cat:"Displays",price:259,rate:3,rating:4.6,badge:"Best value",icon:"🖥️",bg:"#d6e4ff",desc:"1440p IPS panel with USB-C charging in a single cable.",url:"https://example.com/monitor"},
+ {id:4,name:"LumaBar Desk Lamp",cat:"Accessories",price:49,rate:7,rating:4.4,icon:"💡",bg:"#fde0d4",desc:"Adjustable color temperature, no screen glare.",url:"https://example.com/lamp"},
+ {id:5,name:"CoreSupport Chair",cat:"Furniture",price:419,rate:5,rating:4.8,icon:"💺",bg:"#e3dcf7",desc:"Adjustable lumbar support and breathable mesh back.",url:"https://example.com/chair"},
+ {id:6,name:"FocusPods Headphones",cat:"Audio",price:149,rate:5,rating:4.3,icon:"🎧",bg:"#d4f0d0",desc:"Noise cancelling with a boom-free call microphone.",url:"https://example.com/headphones"},
+ {id:7,name:"HubDock 9-in-1",cat:"Accessories",price:69,rate:8,rating:4.2,icon:"🔌",bg:"#f6d6e6",desc:"HDMI, Ethernet, SD reader and 100W pass-through charging.",url:"https://example.com/dock"},
+ {id:8,name:"StreamCam 4K",cat:"Displays",price:119,rate:4,rating:4.5,icon:"📷",bg:"#ffd9b8",desc:"Autofocus webcam with a privacy shutter.",url:"https://example.com/webcam"}
+];
+var cat="All";
+function load(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+var clicks=load("dp_clicks",{}), subs=load("dp_subs",[]);
+function $(i){return document.getElementById(i)}
+function toast(m){var t=$("toast");t.textContent=m;t.classList.add("on");setTimeout(function(){t.classList.remove("on")},2200)}
+function link(p){return p.url+(p.url.indexOf("?")>-1?"&":"?")+"tag="+AFFILIATE_TAG}
+function chips(){
+  var cats=["All"].concat(P.map(function(p){return p.cat}).filter(function(c,i,a){return a.indexOf(c)===i}));
+  $("chips").innerHTML=cats.map(function(c){return '<button class="chip" type="button" aria-pressed="'+(c===cat)+'" data-c="'+c+'">'+c+'</button>'}).join("");
+}
+function render(){
+  var q=$("q").value.trim().toLowerCase(), s=$("sort").value;
+  var list=P.filter(function(p){return (cat==="All"||p.cat===cat)&&(p.name+" "+p.desc).toLowerCase().indexOf(q)>-1});
+  list.sort(function(a,b){return s==="low"?a.price-b.price:s==="high"?b.price-a.price:b.rating-a.rating});
+  $("grid").innerHTML=list.length?list.map(function(p){
+    return '<article class="card"><div class="thumb" style="background:'+p.bg+'" aria-hidden="true">'+p.icon+'</div><div class="body">'+
+    (p.badge?'<span class="badge">'+p.badge+'</span>':'')+'<span class="cat">'+p.cat+'</span><h3>'+p.name+'</h3><p>'+p.desc+'</p>'+
+    '<div class="meta"><span class="price">$'+p.price+'</span><span class="rating">★ '+p.rating.toFixed(1)+'</span></div>'+
+    '<a class="btn buy" data-id="'+p.id+'" href="'+link(p)+'" target="_blank" rel="sponsored nofollow noopener">View on store</a></div></article>';
+  }).join(""):'<p class="empty">No products match. Clear the search or choose another category.</p>';
+}
+function dash(){
+  var total=0,earn=0;
+  $("rows").innerHTML=P.map(function(p){var c=clicks[p.id]||0;total+=c;earn+=c*CONVERSION*p.price*p.rate/100;
+    return '<tr><td>'+p.name+'</td><td>'+c+'</td><td>'+p.rate+'%</td></tr>'}).join("");
+  $("sClicks").textContent=total;$("sSubs").textContent=subs.length;$("sEarn").textContent="$"+earn.toFixed(2);
+}
+function route(){
+  var d=location.hash==="#dashboard";
+  $("home").classList.toggle("hidden",d);$("dashboard").classList.toggle("hidden",!d);
+  if(d)dash();
+}
+$("chips").addEventListener("click",function(e){var c=e.target.getAttribute("data-c");if(c){cat=c;chips();render()}});
+$("grid").addEventListener("click",function(e){var a=e.target.closest(".buy");if(a){var id=a.getAttribute("data-id");clicks[id]=(clicks[id]||0)+1;save("dp_clicks",clicks)}});
+$("q").addEventListener("input",render);$("sort").addEventListener("change",render);
+$("news").addEventListener("submit",function(e){e.preventDefault();var m=$("email").value.trim();
+  if(subs.indexOf(m)<0){subs.push(m);save("dp_subs",subs)}$("email").value="";toast("Subscribed. Check your inbox to confirm.")});
+$("reset").addEventListener("click",function(){clicks={};subs=[];save("dp_clicks",clicks);save("dp_subs",subs);dash();toast("Demo data reset")});
+window.addEventListener("hashchange",route);
+chips();render();route();
+</script>
+</body>
+</html>
